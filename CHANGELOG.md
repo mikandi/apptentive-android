@@ -1,4 +1,11 @@
-2013-??-?? skykelsey 1.2.0
+2013-10-21 skykelsey 1.2.1
+--------------------------
+
+Bugs Fixed:
+
+* ANDROID-188 Rating logic doesn't respect 0 values with OR
+
+2013-10-17 skykelsey 1.2.0
 --------------------------
 
 Major changes:
@@ -16,6 +23,7 @@ Bugs fixed:
 
 * ANDROID-178 ConcurrentModificationException in survey code
 * ANDROID-181 Surveys can be sent twice
+* ANDROID-173 Database locking issue
 
 2013-09-15 skykelsey 1.1.2
 --------------------------

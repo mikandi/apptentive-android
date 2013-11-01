@@ -1,5 +1,26 @@
 This document tracks changes to the API between versions.
 
+# 1.2.0
+
+To improve the quality of the Apptentive SDK, and to make it easier to integrate, the following API method signatures of `Apptentive.java` have been changed or added.
+
+###### Changes
+<table>
+    <tr><th>Old Method Signature</th><th>New Method Signature</th></tr>
+    <tr><td><code>public static void setUserEmail(String email)</code></td><td><code>public static void setInitialUserEmail(Context context, String email)</code></td></tr>
+    <tr><td><code>public static void setCustomData(Map<String, String> customData)</code></td><td><code>public static void setCustomDeviceData(Context context, Map<String, String> customDeviceData)</code></td></tr>
+</table>
+
+###### Additions
+<table>
+    <tr><th>New Methods</th></tr>
+    <tr><td><code>public static void addCustomDeviceData(Context context, String key, String value)</code></td></tr>
+    <tr><td><code>public static void removeCustomDeviceData(Context context, String key)</code></td></tr>
+    <tr><td><code>public static void setCustomPersonData(Context context, Map<String, String> customPersonData)</code></td></tr>
+    <tr><td><code>public static void addCustomPersonData(Context context, String key, String value)</code></td></tr>
+    <tr><td><code>public static void removeCustomPersonData(Context context, String key)</code></td></tr>
+    <tr><td><code>public static int getUnreadMessageCount(Context context)</code></td></tr>
+</table>
 
 # 1.0
 
@@ -15,8 +36,7 @@ General setup:
 
 with
 
-<pre><code>
-Map<String, String> customData = new HashMap<String, String>();
+<pre><code>Map<String, String> customData = new HashMap<String, String>();
 customData.put("username", "Sky Kelsey");
 Apptentive.setCustomData(customData);
 </code></pre>
