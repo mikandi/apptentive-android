@@ -19,9 +19,7 @@ import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import com.apptentive.android.sdk.Log;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -208,19 +206,10 @@ public class Util {
 		return cm != null && cm.getActiveNetworkInfo() != null;
 	}
 
-	public static void ensureClosed(InputStream inputStream) {
-		if (inputStream != null) {
+	public static void ensureClosed(Closeable stream) {
+		if (stream != null) {
 			try {
-				inputStream.close();
-			} catch (IOException e) {
-			}
-		}
-	}
-
-	public static void ensureClosed(OutputStream outputStream) {
-		if (outputStream != null) {
-			try {
-				outputStream.close();
+				stream.close();
 			} catch (IOException e) {
 			}
 		}
@@ -294,7 +283,7 @@ public class Util {
 	/**
 	 * <p>This method will allow you to pass in literal strings. You must wrap the string in single quotes in order to ensure it is not modified
 	 * by Android. Android will try to coerce the string to a float, Integer, etc., if it looks like one.</p>
-	 *
+	 * <p/>
 	 * <p>Example: <code>&lt;meta-data android:name="sdk_distribution" android:value="'1.00'"/></code></p>
 	 * <p>This will evaluate to a String "1.00". If you leave off the single quotes, this method will just cast to a String, so the result would be a String "1.0".</p>
 	 */
@@ -311,5 +300,12 @@ public class Util {
 			ret = ret.substring(1, ret.length());
 		}
 		return ret;
+	}
+
+	public static String stackTraceAsString(Throwable throwable) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		throwable.printStackTrace(pw);
+		return sw.toString();
 	}
 }

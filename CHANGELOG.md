@@ -1,3 +1,48 @@
+2013-01-20 skykelsey 1.2.7
+--------------------------
+
+Bugs Fixed:
+
+* ANDROID-239 PACKAGE_RESTARTED permission causes app to wake often
+
+2013-01-19 skykelsey 1.2.6
+--------------------------
+
+Bugs Fixed:
+
+* ANDROID-238 Survey module doesn't respect "multiple_responses" flag
+
+2013-12-12 skykelsey 1.2.4
+--------------------------
+
+Major changes:
+
+Slightly modified the behavior of the rating flow. The user can now close the rating flow by pressing the back button. This should create a less intrusive experience for the people using your app.
+Bugs Fixed:
+
+* ANDROID-201 Survey targeting doesn't work until after survey cache expires.
+* ANDROID-223 Trim Survey text responses
+* Fixed a bug where the rating flow could launch twice, especially on devices running KitKat.
+
+2013-11-13 skykelsey 1.2.3
+--------------------------
+
+Major changes:
+
+* Add method to API. New way of opening Message Center allowing you to include custom data to be sent with the next message the user sends while the message center is open.
+* Implemented an internal error trapping and reporting system. Exceptions in Apptentive code are now caught and logged to our server so we can maintain a reliable app experience and proactively fix hard to reproduce bugs.
+
+Bugs Fixed:
+
+* Fixed a potential crash in survey fetching code.
+
+2013-11-05 skykelsey 1.2.2
+--------------------------
+
+Bugs Fixed:
+
+* Fix memory leak cause by hanging on to Activity context in database code.
+
 2013-10-21 skykelsey 1.2.1
 --------------------------
 

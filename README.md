@@ -130,7 +130,6 @@ You will need to copy in the bold text below into your AndroidManifest.xml. Comm
         <receiver android:name="com.apptentive.android.sdk.comm.NetworkStateReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.intent.action.PACKAGE_RESTARTED"/>
             </intent-filter>
         </receiver>
     </application>
@@ -177,6 +176,7 @@ import com.apptentive.android.sdk.ApptentiveActivity;
 
 #### Message Center
 
+##### Showing Message Center
 You can add a button that will show the Apptentive feedback UI when pressed. Here is an example button click handler:
 
 ###### Method
@@ -195,6 +195,26 @@ messageCenterButton.setOnClickListener(new View.OnClickListener(){
     }
 });
 ```
+
+##### Showing Message Center and Passing in Custom Message Data
+
+Alternatively, you can supply custom key/value pairs that will be sent in the next message that the user sends while the Message Center is open. For instance, if you have a dining app, you could pass in a key of `restaurant` and value of `Joe's Pizza`.
+
+###### Method
+
+```java
+public static void Apptentive.showMessageCenter(Activity activity, Map<String, String> customData);
+```
+
+###### Example
+
+```java
+    Map<String, String> customData = new HashMap<String, String>();
+    customData.put("restaurant", "Joe's Pizza");
+    Apptentive.showMessageCenter(YourActivity.this, customData);
+```
+
+##### Be Notified of New Messages
 
 You can also receive a notification when the number of unread messages waiting to be viewed by the user changes.
 Do this in your main Activity's `onCreate()` method:
@@ -226,7 +246,7 @@ have to do is call the ratings module when you want to show the dialog. Here is 
 ###### Method
 
 ```java
-public static void Apptentive.showRatingFlowIfConditionsAreMet(Activity activity);
+public static boolean Apptentive.showRatingFlowIfConditionsAreMet(Activity activity);
 ```
 
 ###### Example
@@ -236,7 +256,7 @@ public static void Apptentive.showRatingFlowIfConditionsAreMet(Activity activity
 public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
-        Apptentive.showRatingFlowIfConditionsAreMet(this);
+        boolean ret = Apptentive.showRatingFlowIfConditionsAreMet(this);
     }
 }
 ```

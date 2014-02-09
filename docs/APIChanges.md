@@ -1,26 +1,49 @@
 This document tracks changes to the API between versions.
 
+
+# 1.2.7
+
+###### Changes
+
+Please remove the line `<action android:name="android.intent.action.PACKAGE_RESTARTED"/>` action from Apptentive's NetworkStateReceiver in your manifest. This is not needed, and may cause excessive battery drain.
+
+
+# 1.2.3
+
+###### Changes
+| Old Method Signature | New Method Signature |
+| -------------------- | -------------------- |
+| `public static void showRatingFlowIfConditionsAreMet(Activity activity)` | `public static boolean showRatingFlowIfConditionsAreMet(Activity activity)`
+
+
+# 1.2.1
+
+###### Additions
+| New Methods |
+| ----------- |
+| `public static void showMessageCenter(Activity activity, Map<String, String> customData)` |
+
+
 # 1.2.0
 
 To improve the quality of the Apptentive SDK, and to make it easier to integrate, the following API method signatures of `Apptentive.java` have been changed or added.
 
 ###### Changes
-<table>
-    <tr><th>Old Method Signature</th><th>New Method Signature</th></tr>
-    <tr><td><code>public static void setUserEmail(String email)</code></td><td><code>public static void setInitialUserEmail(Context context, String email)</code></td></tr>
-    <tr><td><code>public static void setCustomData(Map<String, String> customData)</code></td><td><code>public static void setCustomDeviceData(Context context, Map<String, String> customDeviceData)</code></td></tr>
-</table>
+| Old Method Signature | New Method Signature |
+| -------------------- | -------------------- |
+| `public static void setUserEmail(String email)` | `public static void setInitialUserEmail(Context context, String email)`
+| `public static void setCustomData(Map<String, String> customData)` | `public static void setCustomDeviceData(Context context, Map<String, String> customDeviceData)` |
 
 ###### Additions
-<table>
-    <tr><th>New Methods</th></tr>
-    <tr><td><code>public static void addCustomDeviceData(Context context, String key, String value)</code></td></tr>
-    <tr><td><code>public static void removeCustomDeviceData(Context context, String key)</code></td></tr>
-    <tr><td><code>public static void setCustomPersonData(Context context, Map<String, String> customPersonData)</code></td></tr>
-    <tr><td><code>public static void addCustomPersonData(Context context, String key, String value)</code></td></tr>
-    <tr><td><code>public static void removeCustomPersonData(Context context, String key)</code></td></tr>
-    <tr><td><code>public static int getUnreadMessageCount(Context context)</code></td></tr>
-</table>
+| New Methods |
+| ----------- |
+| `public static void addCustomDeviceData(Context context, String key, String value)` |
+| `public static void removeCustomDeviceData(Context context, String key)` |
+| `public static void setCustomPersonData(Context context, Map<String, String> customPersonData)` |
+| `public static void addCustomPersonData(Context context, String key, String value)` |
+| `public static void removeCustomPersonData(Context context, String key)` |
+| `public static int getUnreadMessageCount(Context context)` |
+
 
 # 1.0
 
