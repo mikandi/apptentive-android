@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2014, Apptentive, Inc. All Rights Reserved.
+  ~ Please refer to the LICENSE file for the terms and conditions
+  ~ under which redistribution and use of this file is permitted.
+  -->
+
+<resources>
+    <string-array name="survey_tags">
+        <item>No Tag</item>
+        <item>test_tag_1</item>
+        <item>test_tag_2</item>
+        <item>test_tag_3</item>
+    </string-array>
+
+    <string-array name="events">
+        <item>init</item>
+        <item>event_1</item>
+        <item>event_2</item>
+        <item>event_3</item>
+        <item>test_survey_interaction</item>
+        <item>app.launch</item>
+    </string-array>
+
+    <string-array name="interactions">
+        <item>Survey</item>
+        <item>Working Rating Flow Default Text</item>
+        <item>Working Rating Flow Modified Text</item>
+        <item>Feedback Dialog</item>
+        <item>Rating Dialog</item>
+        <item>App Store Rating</item>
+        <item>Enjoyment Dialog</item>
+        <item>UpgradeMessage real example</item>
+        <item>UpgradeMessage exercise with branding</item>
+        <item>UpgradeMessage exercise no branding</item>
+    </string-array>
+
+    <string-array name="attachment_files">
+        <item>test.pptx</item>
+        <item>test.docx</item>
+        <item>test.pdf</item>
+    </string-array>
+</resources>

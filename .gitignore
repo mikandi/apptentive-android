@@ -1,9 +1,19 @@
+# Mac OS
 .DS_Store
 
+# Gradle
+.gradle
+
 # Android
+local.properties
 gen/
 out/
 bin/
+build/
 
 # IntelliJ
 *.iws
+
+# Eclipse
+.settings
+.metadata
