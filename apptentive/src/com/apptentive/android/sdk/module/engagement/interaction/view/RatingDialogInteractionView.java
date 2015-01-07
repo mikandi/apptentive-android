@@ -6,13 +6,18 @@
 
 package com.apptentive.android.sdk.module.engagement.interaction.view;
 
+
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.apptentive.android.sdk.R;
 import com.apptentive.android.sdk.module.engagement.EngagementModule;
 import com.apptentive.android.sdk.module.engagement.interaction.model.RatingDialogInteraction;
+
 
 /**
  * @author Sky Kelsey
@@ -53,8 +58,22 @@ public class RatingDialogInteractionView extends InteractionView<RatingDialogInt
 		rateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				EngagementModule.engageInternal(activity, interaction.getType().name(), CODE_POINT_RATE);
+				
+				//EngagementModule.engageInternal(activity, interaction.getType().name(), CODE_POINT_RATE);
+				//activity.finish();
+				
+				// hacky fix! 
+				
+				String url = 
+						"https://twitter.com/intent/tweet?source=webclient&text=The+"
+						+ "%40MiKandiStore+app+is+awesome%2C+I+love+it%21+If+you%27re+"
+						+ "an+adult+with+an+Android+device+you+will+too%2C+MiKandi.com";
+							
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(url));
+				activity.startActivity(i);
 				activity.finish();
+			
 			}
 		});
 

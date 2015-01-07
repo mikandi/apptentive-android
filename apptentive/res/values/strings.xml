@@ -35,8 +35,8 @@
 
     <string name="apptentive_do_you_love_this_app">Do you love %s?</string>
 
-    <string name="apptentive_rating_message_fs">We\'re so happy to hear that you love %s! It\'d be really helpful if you rated us. Thanks so much for spending some time with us.</string>
-    <string name="apptentive_rate_this_app">Rate %s</string>
+    <string name="apptentive_rating_message_fs">We\'re so happy to hear that you love %s! It\'d be really helpful if you shared us with your followers! Thanks so much for spending some time with us.</string>
+    <string name="apptentive_rate_this_app">Share %s</string>
     <string name="apptentive_rating_remind">Remind Me Later</string>
     <string name="apptentive_rating_error">We\'re unable to find this app in the store. Please visit the store to find and rate it.</string>
 
