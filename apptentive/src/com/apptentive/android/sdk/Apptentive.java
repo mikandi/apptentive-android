@@ -6,6 +6,15 @@
 
 package com.apptentive.android.sdk;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,28 +25,44 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.Toast;
+
 import com.apptentive.android.sdk.comm.ApptentiveClient;
 import com.apptentive.android.sdk.comm.ApptentiveHttpResponse;
-import com.apptentive.android.sdk.model.*;
+import com.apptentive.android.sdk.lifecycle.ActivityLifecycleManager;
+import com.apptentive.android.sdk.model.AppRelease;
+import com.apptentive.android.sdk.model.CodePointStore;
+import com.apptentive.android.sdk.model.CommerceExtendedData;
+import com.apptentive.android.sdk.model.Configuration;
+import com.apptentive.android.sdk.model.ConversationTokenRequest;
+import com.apptentive.android.sdk.model.CustomData;
+import com.apptentive.android.sdk.model.Device;
+import com.apptentive.android.sdk.model.ExtendedData;
+import com.apptentive.android.sdk.model.FileMessage;
+import com.apptentive.android.sdk.model.LocationExtendedData;
+import com.apptentive.android.sdk.model.Person;
+import com.apptentive.android.sdk.model.Sdk;
+import com.apptentive.android.sdk.model.TextMessage;
+import com.apptentive.android.sdk.model.TimeExtendedData;
 import com.apptentive.android.sdk.module.engagement.EngagementModule;
 import com.apptentive.android.sdk.module.engagement.interaction.InteractionManager;
+import com.apptentive.android.sdk.module.engagement.interaction.model.Interaction;
 import com.apptentive.android.sdk.module.messagecenter.ApptentiveMessageCenter;
 import com.apptentive.android.sdk.module.messagecenter.MessageManager;
 import com.apptentive.android.sdk.module.messagecenter.MessagePollingWorker;
 import com.apptentive.android.sdk.module.messagecenter.UnreadMessagesListener;
-import com.apptentive.android.sdk.lifecycle.ActivityLifecycleManager;
 import com.apptentive.android.sdk.module.metric.MetricModule;
 import com.apptentive.android.sdk.module.rating.IRatingProvider;
 import com.apptentive.android.sdk.module.survey.OnSurveyFinishedListener;
-import com.apptentive.android.sdk.storage.*;
+import com.apptentive.android.sdk.storage.AppReleaseManager;
+import com.apptentive.android.sdk.storage.ApptentiveDatabase;
+import com.apptentive.android.sdk.storage.DeviceManager;
+import com.apptentive.android.sdk.storage.PayloadSendWorker;
+import com.apptentive.android.sdk.storage.PersonManager;
+import com.apptentive.android.sdk.storage.SdkManager;
+import com.apptentive.android.sdk.storage.VersionHistoryStore;
 import com.apptentive.android.sdk.util.Constants;
 import com.apptentive.android.sdk.util.Util;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
 
 /**
  * This class contains the complete API for accessing Apptentive features from within your app.
@@ -1059,5 +1084,38 @@ public class Apptentive {
 		} else {
 			Log.d("Person was not updated.");
 		}
+	}
+	
+	/// MiKandi tweaks
+	
+	public static boolean forceShowRatingsPromptInteraction(Activity activity)
+	{
+		try
+		{
+			Log.d("Force Showing Ratings Prompt.");
+
+//			either TODO: find out what getRatingsPromptInteraction is? Should we implement this?
+//			Interaction interaction = getRatingsPromptInteraction(activity);
+//			or TODO: add the proper String parameter to the method below:
+			final Interaction interaction = InteractionManager.getApplicableInteraction(activity, "");
+
+			if (interaction != null)
+			{
+				CodePointStore.storeInteractionForCurrentAppVersion(activity, interaction.getId());
+				EngagementModule.launchInteraction(activity, interaction);
+				return true;
+			}
+			else
+			{
+				// TODO: localize!
+				Toast.makeText(activity, "No Ratings Prompt available for that Interaction.", Toast.LENGTH_SHORT).show();
+			}
+		}
+		catch (Exception e)
+		{
+			MetricModule.sendError(activity.getApplicationContext(), e, null, null);
+			Log.e("Error:", e);
+		}
+		return false;
 	}
 }
