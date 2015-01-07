@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import com.apptentive.android.sdk.Log;
@@ -234,8 +235,8 @@ public class Util {
 		Log.e("Screen size: PX=%dx%d DP=%dx%d", point.x, point.y, Util.pixelsToDips(context, point.x), Util.pixelsToDips(context, point.y));
 	}
 
-	public static boolean isEmpty(String theString) {
-		return theString == null || theString.length() == 0;
+	public static boolean isEmpty(CharSequence charSequence) {
+		return charSequence == null || charSequence.length() == 0;
 	}
 
 	public static Integer parseCacheControlHeader(String cacheControlHeader) {
@@ -377,5 +378,18 @@ public class Util {
 			Util.ensureClosed(reader);
 		}
 		return out.toString();
+	}
+
+	public static Integer getMajorOsVersion() {
+		try {
+			String release = Build.VERSION.RELEASE;
+			String[] parts = release.split("\\.");
+			if (parts != null && parts.length != 0) {
+				return Integer.parseInt(parts[0]);
+			}
+		} catch (Exception e) {
+			Log.w("Error getting major OS version", e);
+		}
+		return -1;
 	}
 }
