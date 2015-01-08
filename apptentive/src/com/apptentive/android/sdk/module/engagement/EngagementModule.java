@@ -43,7 +43,7 @@ public class EngagementModule {
 	public static synchronized boolean engage(Activity activity, String vendor, String interaction, String eventName) {
 		return engage(activity, vendor, interaction, eventName, null, null, (ExtendedData[]) null);
 	}
-
+	// vendor is "com.apptentive" , interation is  "app" 
 	public static synchronized boolean engage(Activity activity, String vendor, String interaction, String eventName, Map<String, String> data, Map<String, Object> customData, ExtendedData... extendedData) {
 		try {
 			String eventLabel = generateEventLabel(vendor, interaction, eventName);

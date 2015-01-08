@@ -1097,24 +1097,36 @@ public class Apptentive {
 //			either TODO: find out what getRatingsPromptInteraction is? Should we implement this?
 //			Interaction interaction = getRatingsPromptInteraction(activity);
 //			or TODO: add the proper String parameter to the method below:
-			final Interaction interaction = InteractionManager.getApplicableInteraction(activity, "");
-
-			if (interaction != null)
+			
+			// vendor is "com.apptentive" , interation is  "app" 
+			// see EngagementModule #62 for getApplicableInteraction
+			// see EngagementModule #95 for generateEventLabel
+			
+			//InteractionManager.fetchAndStoreInteractions(activity.getApplicationContext());
+			String eventLabel = EngagementModule.generateEventLabel("com.apptentive", "app", "init");
+			
+			Log.i("Apptentive" , "Trying to force open ");
+			
+			final Interaction interaction = InteractionManager.getApplicableInteraction(activity, eventLabel);
+			Log.i("Apptentive " ,  "interaction is : " + interaction.toString());
+			
+			if (interaction == null)
+			{
+				Toast.makeText(activity, "No Ratings Prompt available for that Interaction.", Toast.LENGTH_SHORT).show();
+				
+			}
+			else
 			{
 				CodePointStore.storeInteractionForCurrentAppVersion(activity, interaction.getId());
 				EngagementModule.launchInteraction(activity, interaction);
 				return true;
 			}
-			else
-			{
-				// TODO: localize!
-				Toast.makeText(activity, "No Ratings Prompt available for that Interaction.", Toast.LENGTH_SHORT).show();
-			}
 		}
 		catch (Exception e)
 		{
 			MetricModule.sendError(activity.getApplicationContext(), e, null, null);
-			Log.e("Error:", e);
+			e.printStackTrace();
+			Log.w("Apptentive" , " Exception thrown ");
 		}
 		return false;
 	}
